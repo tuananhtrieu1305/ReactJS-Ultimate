@@ -12,6 +12,9 @@ body {
   .header-container {
     position: relative;
     z-index: 10;
+    .btn {
+      height: 43px;
+    }
     .navbar-brand {
       font-size: 24px;
     }
@@ -24,5 +27,16 @@ body {
         }
       }
     }
+  }
+}
+
+@media (min-width: 1500px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1450px !important;
   }
 }
