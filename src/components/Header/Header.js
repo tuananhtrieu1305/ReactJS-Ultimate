@@ -9,9 +9,10 @@ const Header = () => {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand
+        <Link
+          to="/"
           href="#home"
-          className="d-flex align-items-center justify-content-center"
+          className="navbar-brand d-flex align-items-center justify-content-center"
         >
           <img
             alt=""
@@ -21,7 +22,7 @@ const Header = () => {
             className="d-inline-block align-top"
           />{" "}
           QuizFun
-        </Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -36,7 +37,7 @@ const Header = () => {
             </Link>
           </Nav>
           <Nav>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+            <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item>Log out</NavDropdown.Item>
               <NavDropdown.Item>Profiles</NavDropdown.Item>
             </NavDropdown>
