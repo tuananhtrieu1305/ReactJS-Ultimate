@@ -7,3 +7,36 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: grayscale;
 }
+
+.app-container {
+  .header-container {
+    position: relative;
+    z-index: 10;
+    .btn {
+      height: 43px;
+    }
+    .navbar-brand {
+      font-size: 24px;
+    }
+    .navbar-nav {
+      margin-left: 20px;
+      .nav-link {
+        font-size: 18px;
+        &.active {
+          color: #6a5af9;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1500px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl,
+  .container-xxl {
+    max-width: 1450px !important;
+  }
+}
