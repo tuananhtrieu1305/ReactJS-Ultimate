@@ -7,3 +7,20 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-font-smoothing: grayscale;
 }
+
+.app-container {
+  .header-container {
+    .navbar-brand {
+      font-size: 24px;
+    }
+    .navbar-nav {
+      margin-left: 20px;
+      .nav-link {
+        font-size: 18px;
+        &.active {
+          color: #6a5af9;
+        }
+      }
+    }
+  }
+}
