@@ -1,8 +1,19 @@
 .admin-container {
-    display: flex;
-    .admin-sidebar {
-        .pro-sidebar {
-            height: 100vh !important;
-            }
+  display: flex;
+  gap: 0 30px;
+  .admin-sidebar {
+    .pro-sidebar {
+      height: 100vh !important;
     }
+  }
+  .admin-content {
+    width: 100%;
+    margin-top: 10px;
+    .admin-header {
+      height: 40px;
+      svg {
+        cursor: pointer;
+      }
+    }
+  }
 }

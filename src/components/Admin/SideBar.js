@@ -57,20 +57,17 @@ const SideBar = (props) => {
 
         <SidebarContent>
           <Menu iconShape="circle">
-            <MenuItem
-              icon={<FaTachometerAlt />}
-              suffix={<span className="badge red">New</span>}
-            >
+            <MenuItem icon={<FaTachometerAlt />}>
               dashboard
+              <Link to="/admins"></Link>
             </MenuItem>
           </Menu>
           <Menu iconShape="circle">
-            <SubMenu
-              suffix={<span className="badge yellow">3</span>}
-              icon={<FaRegLaughWink />}
-              title="Features"
-            >
-              <MenuItem> Manage User</MenuItem>
+            <SubMenu icon={<FaRegLaughWink />} title="Features">
+              <MenuItem>
+                Manage User
+                <Link to="/admins/manage-users"></Link>
+              </MenuItem>
               <MenuItem> Manage Quiz Form</MenuItem>
               <MenuItem> Manage Quiz</MenuItem>
             </SubMenu>
