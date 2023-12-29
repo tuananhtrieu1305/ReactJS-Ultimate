@@ -9,17 +9,13 @@ import {
   SidebarContent,
 } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
-import {
-  FaTachometerAlt,
-  FaGem,
-  FaGithub,
-  FaRegLaughWink,
-} from "react-icons/fa";
+import { FaTachometerAlt, FaGithub, FaRegLaughWink } from "react-icons/fa";
 import sidebarBg from "../../assets/images/sidebarbg.jpg";
 import logo from "../../assets/images/logo.svg";
+import "../../App.scss";
 
 const SideBar = (props) => {
-  const { image, collapsed, toggled, handleToggleSidebar } = props;
+  const { collapsed, toggled, handleToggleSidebar } = props;
   return (
     <>
       <ProSidebar
@@ -33,7 +29,7 @@ const SideBar = (props) => {
           <Link
             to="/"
             href="#home"
-            className="navbar-brand d-flex align-items-center justify-content-center"
+            className="navbar-brand d-flex align-items-center mx-3 "
           >
             <img
               alt=""
@@ -44,7 +40,7 @@ const SideBar = (props) => {
             />{" "}
             <div
               style={{
-                padding: "24px 24px 24px 0",
+                padding: "24px",
                 textTransform: "uppercase",
                 fontWeight: "bold",
                 fontSize: 14,
@@ -67,16 +63,16 @@ const SideBar = (props) => {
             >
               dashboard
             </MenuItem>
-            <MenuItem icon={<FaGem />}> components </MenuItem>
           </Menu>
           <Menu iconShape="circle">
             <SubMenu
               suffix={<span className="badge yellow">3</span>}
               icon={<FaRegLaughWink />}
+              title="Features"
             >
-              <MenuItem> 1</MenuItem>
-              <MenuItem> 2</MenuItem>
-              <MenuItem> 3</MenuItem>
+              <MenuItem> Manage User</MenuItem>
+              <MenuItem> Manage Quiz Form</MenuItem>
+              <MenuItem> Manage Quiz</MenuItem>
             </SubMenu>
           </Menu>
         </SidebarContent>
