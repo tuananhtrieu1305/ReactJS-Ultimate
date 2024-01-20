@@ -4,9 +4,11 @@ import Modal from "react-bootstrap/Modal";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
+import axios from "axios";
 
-function ModalCreateUser() {
-  const [show, setShow] = useState(false);
+function ModalCreateUser(props) {
+  const { show, setShow } = props;
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -14,7 +16,15 @@ function ModalCreateUser() {
   const [image, setImage] = useState("");
   const [previewImg, setPreviewImg] = useState("");
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setEmail("");
+    setPassword("");
+    setUsername("");
+    setRole("USER");
+    setImage("");
+    setPreviewImg("");
+  };
   const handleShow = () => setShow(true);
   const handleUploadImg = (event) => {
     if (event.target && event.target.files && event.target.files[0]) {
@@ -22,13 +32,23 @@ function ModalCreateUser() {
       setImage(event.target.files[0]);
     }
   };
+  const handleSubmitCreateUser = async () => {
+    const data = new FormData();
+    data.append("email", email);
+    data.append("password", password);
+    data.append("username", username);
+    data.append("role", role);
+    data.append("userImage", image);
+
+    let res = await axios.post(
+      "http://localhost:8081/api/v1/participant",
+      data
+    );
+    console.log(res);
+  };
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-
       <Modal
         show={show}
         onHide={handleClose}
@@ -104,7 +124,7 @@ function ModalCreateUser() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={() => handleSubmitCreateUser()}>
             Save
           </Button>
         </Modal.Footer>
