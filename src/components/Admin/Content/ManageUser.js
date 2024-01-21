@@ -4,9 +4,12 @@ import { FaPlusCircle } from "react-icons/fa";
 import TableUser from "./TableUser";
 import { useEffect, useState } from "react";
 import { getAllUsers } from "../../../services/apiServices";
+import ModalUpdateUser from "./ModalUpdateUser";
 
 const ManageUser = (props) => {
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
+  const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+  const [dataUpdate, setDataUpdate] = useState({});
 
   const [listUser, setListUser] = useState([]);
 
@@ -19,6 +22,10 @@ const ManageUser = (props) => {
     if (res.EC === 0) {
       setListUser(res.DT);
     }
+  };
+  const handleClickBtnUpdate = (user) => {
+    setShowModalUpdateUser(true);
+    setDataUpdate(user);
   };
 
   return (
@@ -34,13 +41,22 @@ const ManageUser = (props) => {
           </button>
         </div>
         <section className="table-user">
-          <TableUser listUser={listUser}></TableUser>
+          <TableUser
+            listUser={listUser}
+            handleClickBtnUpdate={handleClickBtnUpdate}
+          ></TableUser>
         </section>
         <ModalCreateUser
           show={showModalCreateUser}
           setShow={setShowModalCreateUser}
           fetchListUser={fetchListUser}
         ></ModalCreateUser>
+        <ModalUpdateUser
+          show={showModalUpdateUser}
+          setShow={setShowModalUpdateUser}
+          fetchListUser={fetchListUser}
+          dataUpdate={dataUpdate}
+        ></ModalUpdateUser>
       </section>
     </div>
   );
