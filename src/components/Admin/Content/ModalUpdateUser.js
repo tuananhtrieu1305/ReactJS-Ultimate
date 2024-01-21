@@ -5,11 +5,11 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { toast } from "react-toastify";
-import { postCreateNewUser } from "../../../services/apiServices";
 import _ from "lodash";
+import { putUpdateUser } from "../../../services/apiServices";
 
 function ModalUpdateUser(props) {
-  const { show, setShow, fetchListUser, dataUpdate } = props;
+  const { show, setShow, fetchListUser, dataUpdate, resetUpdateData } = props;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,6 +26,7 @@ function ModalUpdateUser(props) {
     setRole("USER");
     setImage("");
     setPreviewImg("");
+    resetUpdateData();
   };
   const handleUploadImg = (event) => {
     if (event.target && event.target.files && event.target.files[0]) {
@@ -38,7 +39,7 @@ function ModalUpdateUser(props) {
       toast.error("Please enter username!");
     }
 
-    let data = await postCreateNewUser(email, password, username, role, image);
+    let data = await putUpdateUser(dataUpdate.id, username, role, image);
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
