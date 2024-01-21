@@ -17,8 +17,8 @@ const putUpdateUser = (id, username, role, image) => {
   data.append("userImage", image);
   return axios.put("api/v1/participant", data);
 };
-const getAllUsers = () => {
-  return axios.get("api/v1/participant/all");
+const getAllUsers = (page, limit) => {
+  return axios.get(`api/v1/participant?page=${page}&limit=${limit}`);
 };
 const deleteUser = (userID) => {
   return axios.delete("api/v1/participant", { data: { id: userID } });

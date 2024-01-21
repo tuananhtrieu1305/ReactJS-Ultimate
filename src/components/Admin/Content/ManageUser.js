@@ -9,23 +9,27 @@ import ModalViewUser from "./ModalViewUser";
 import ModalDeleteUser from "./ModalDeleteUser";
 
 const ManageUser = (props) => {
+  const LIMIT_USER = 3;
+
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
   const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
   const [showModalViewUser, setShowModalViewUser] = useState(false);
   const [showModalDeleteUser, setShowModalDeleteUser] = useState(false);
   const [dataUpdate, setDataUpdate] = useState({});
   const [dataDelete, setDataDelete] = useState({});
+  const [pageCount, setPageCount] = useState(0);
 
   const [listUser, setListUser] = useState([]);
 
   useEffect(() => {
-    fetchListUser();
+    fetchListUser(1);
   }, []);
 
-  const fetchListUser = async () => {
-    let res = await getAllUsers();
+  const fetchListUser = async (page) => {
+    let res = await getAllUsers(page, LIMIT_USER);
     if (res.EC === 0) {
-      setListUser(res.DT);
+      setListUser(res.DT.users);
+      setPageCount(res.DT.totalPages);
     }
   };
   const handleClickBtnUpdate = (user) => {
@@ -59,12 +63,14 @@ const ManageUser = (props) => {
             <FaPlusCircle /> Add new user
           </button>
         </div>
-        <section className="table-user">
+        <section className="table-user mt-5">
           <TableUser
             listUser={listUser}
             handleClickBtnUpdate={handleClickBtnUpdate}
             handleClickBtnView={handleClickBtnView}
             handleClickBtnDelete={handleClickBtnDelete}
+            fetchListUser={fetchListUser}
+            pageCount={pageCount}
           ></TableUser>
         </section>
         <ModalCreateUser

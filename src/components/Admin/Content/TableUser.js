@@ -1,4 +1,6 @@
 import Table from "react-bootstrap/Table";
+import ReactPaginate from "react-paginate";
+import { useState } from "react";
 
 const TableUser = (props) => {
   const {
@@ -6,7 +8,13 @@ const TableUser = (props) => {
     handleClickBtnUpdate,
     handleClickBtnView,
     handleClickBtnDelete,
+    fetchListUser,
+    pageCount,
   } = props;
+
+  const handlePageClick = (event) => {
+    fetchListUser(+event.selected + 1);
+  };
 
   return (
     <>
@@ -62,6 +70,28 @@ const TableUser = (props) => {
           )}
         </tbody>
       </Table>
+      <div className="d-flex align-items-center justify-content-center mt-4">
+        <ReactPaginate
+          nextLabel="Next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={2}
+          pageCount={pageCount}
+          previousLabel="< Prev"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakLabel="..."
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={null}
+        />
+      </div>
     </>
   );
 };
