@@ -1,7 +1,12 @@
 import Table from "react-bootstrap/Table";
 
 const TableUser = (props) => {
-  const { listUser, handleClickBtnUpdate, handleClickBtnView } = props;
+  const {
+    listUser,
+    handleClickBtnUpdate,
+    handleClickBtnView,
+    handleClickBtnDelete,
+  } = props;
 
   return (
     <>
@@ -38,7 +43,12 @@ const TableUser = (props) => {
                     >
                       Update
                     </button>
-                    <button className="btn btn-danger">Delete</button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handleClickBtnDelete(item)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );

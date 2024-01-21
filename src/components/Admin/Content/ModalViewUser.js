@@ -61,7 +61,6 @@ function ModalViewUser(props) {
                   placeholder="Enter email"
                   value={email}
                   disabled
-                  onChange={(event) => setEmail(event.target.value)}
                 />
               </Form.Group>
 
@@ -72,7 +71,6 @@ function ModalViewUser(props) {
                   placeholder="Password"
                   value={password}
                   disabled
-                  onChange={(event) => setPassword(event.target.value)}
                 />
               </Form.Group>
             </Row>
@@ -84,16 +82,12 @@ function ModalViewUser(props) {
                   placeholder="Username"
                   value={username}
                   disabled
-                  onChange={(event) => setUsername(event.target.value)}
                 />
               </Form.Group>
 
               <Form.Group as={Col}>
                 <Form.Label>ROLE</Form.Label>
-                <Form.Select
-                  defaultValue="USER"
-                  onChange={(event) => setRole(event.target.value)}
-                >
+                <Form.Select disabled value={role}>
                   <option>USER</option>
                   <option>ADMIN</option>
                 </Form.Select>

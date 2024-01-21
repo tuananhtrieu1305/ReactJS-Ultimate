@@ -113,7 +113,7 @@ function ModalUpdateUser(props) {
               <Form.Group as={Col}>
                 <Form.Label>ROLE</Form.Label>
                 <Form.Select
-                  defaultValue="USER"
+                  value={role}
                   onChange={(event) => setRole(event.target.value)}
                 >
                   <option>USER</option>
