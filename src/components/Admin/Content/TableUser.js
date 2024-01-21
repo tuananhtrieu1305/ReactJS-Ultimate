@@ -1,7 +1,7 @@
 import Table from "react-bootstrap/Table";
 
 const TableUser = (props) => {
-  const { listUser, handleClickBtnUpdate } = props;
+  const { listUser, handleClickBtnUpdate, handleClickBtnView } = props;
 
   return (
     <>
@@ -26,7 +26,12 @@ const TableUser = (props) => {
                   <td>{item.email}</td>
                   <td className="text-center">{item.role}</td>
                   <td className="text-center">
-                    <button className="btn btn-success">View</button>
+                    <button
+                      className="btn btn-success"
+                      onClick={() => handleClickBtnView(item)}
+                    >
+                      View
+                    </button>
                     <button
                       className="btn btn-warning mx-2"
                       onClick={() => handleClickBtnUpdate(item)}
