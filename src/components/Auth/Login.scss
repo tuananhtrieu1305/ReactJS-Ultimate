@@ -47,4 +47,16 @@
       }
     }
   }
+  .pass-group {
+    position: relative;
+    .eye-icon {
+      position: absolute;
+      top: 54%;
+      right: 10px;
+      cursor: pointer;
+    }
+    input {
+      padding-right: 28px !important;
+    }
+  }
 }

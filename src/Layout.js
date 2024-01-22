@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./components/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Signup from "./components/Auth/Signup";
 
 const Layout = (props) => {
   return (
@@ -22,6 +23,7 @@ const Layout = (props) => {
           <Route path="manage-users" element={<ManageUser></ManageUser>} />
         </Route>
         <Route path="/login" element={<Login></Login>} />
+        <Route path="/signup" element={<Signup></Signup>} />
       </Routes>
       <ToastContainer
         position="top-right"

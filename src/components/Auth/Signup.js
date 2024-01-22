@@ -1,14 +1,16 @@
-import { FcGoogle } from "react-icons/fc";
-import { FaMicrosoft } from "react-icons/fa";
 import "./Login.scss";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postLogin } from "../../services/apiServices";
 import { toast } from "react-toastify";
+import { FaEye } from "react-icons/fa";
+import { postSignup } from "../../services/apiServices";
+import { IoMdEyeOff } from "react-icons/io";
 
-const Login = (props) => {
+const Signup = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [isShowPassword, setIsShowPassword] = useState(false);
   const navigate = useNavigate();
   const validateEmail = (email) => {
     return String(email)
@@ -18,7 +20,7 @@ const Login = (props) => {
       );
   };
 
-  const handleClickBtnLogin = async () => {
+  const handleClickBtnSignup = async () => {
     const isValidate = validateEmail(email);
     if (!isValidate) {
       toast.error("Invalid email");
@@ -27,8 +29,11 @@ const Login = (props) => {
     if (!password) {
       toast.error("Please enter password!");
     }
+    if (!username) {
+      toast.error("Please enter username!");
+    }
 
-    let data = await postLogin(email, password);
+    let data = await postSignup(email, username, password);
     if (data && data.EC === 0) {
       toast.success(data.EM);
       navigate("/");
@@ -41,20 +46,17 @@ const Login = (props) => {
   return (
     <div className="login-container">
       <section className="login-header">
-        <span>Don't have an account yet?</span>
+        <span>Already have an account?</span>
         <button
           className="btn btn-outline-dark"
-          onClick={() => navigate("/signup")}
+          onClick={() => navigate("/login")}
         >
-          Sign up
+          Log in
         </button>
-        <a href="#!" className="text-secondary">
-          Contact us
-        </a>
       </section>
       <section className="col-3 container mt-4 login-content">
         <h1 className="text-center">QuizFun</h1>
-        <span className="text-center d-block mt-4">Hello, who’s this?</span>
+        <span className="text-center d-block mt-4">Start your journey?</span>
         <form action="#!">
           <div>
             <label htmlFor="login-email">Email</label>
@@ -66,36 +68,47 @@ const Login = (props) => {
               placeholder="abc@gmail.com"
             />
           </div>
-          <div>
+          <div className="pass-group">
             <label htmlFor="login-password">Password</label>
             <input
-              type="password"
+              type={!isShowPassword ? "password" : "text"}
               id="login-password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               placeholder="*****"
             />
+            {isShowPassword ? (
+              <span
+                className="eye-icon"
+                onClick={() => setIsShowPassword(false)}
+              >
+                <FaEye />
+              </span>
+            ) : (
+              <span
+                className="eye-icon"
+                onClick={() => setIsShowPassword(true)}
+              >
+                <IoMdEyeOff />
+              </span>
+            )}
+          </div>
+          <div>
+            <label htmlFor="login-username">Username</label>
+            <input
+              type="text"
+              id="login-username"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+            />
           </div>
         </form>
-        <a href="#!" className="text-secondary mt-3 d-block">
-          Forgot password?
-        </a>
         <div className="btn-groups">
           <button
             className="btn btn-dark"
-            onClick={() => handleClickBtnLogin()}
+            onClick={() => handleClickBtnSignup()}
           >
-            Log in to QuizFun
-          </button>
-          <div className="btn-decoration">
-            <div></div>
-            <span>OR</span>
-          </div>
-          <button className="btn btn-outline-dark d-flex justify-content-center align-items-center gap-2">
-            <FcGoogle /> Log in with Google
-          </button>
-          <button className="btn btn-outline-dark mt-2 d-flex justify-content-center align-items-center gap-2">
-            <FaMicrosoft /> Log in with Microsoft
+            Create my free account
           </button>
           <a
             href="#!"
@@ -110,4 +123,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default Signup;
