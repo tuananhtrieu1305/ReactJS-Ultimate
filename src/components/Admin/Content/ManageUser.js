@@ -18,6 +18,7 @@ const ManageUser = (props) => {
   const [dataUpdate, setDataUpdate] = useState({});
   const [dataDelete, setDataDelete] = useState({});
   const [pageCount, setPageCount] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const [listUser, setListUser] = useState([]);
 
@@ -71,12 +72,16 @@ const ManageUser = (props) => {
             handleClickBtnDelete={handleClickBtnDelete}
             fetchListUser={fetchListUser}
             pageCount={pageCount}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
           ></TableUser>
         </section>
         <ModalCreateUser
           show={showModalCreateUser}
           setShow={setShowModalCreateUser}
           fetchListUser={fetchListUser}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         ></ModalCreateUser>
         <ModalUpdateUser
           show={showModalUpdateUser}
@@ -84,12 +89,16 @@ const ManageUser = (props) => {
           fetchListUser={fetchListUser}
           dataUpdate={dataUpdate}
           resetUpdateData={resetUpdateData}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         ></ModalUpdateUser>
         <ModalViewUser
           show={showModalViewUser}
           setShow={setShowModalViewUser}
           dataUpdate={dataUpdate}
           resetUpdateData={resetUpdateData}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         ></ModalViewUser>
         <ModalDeleteUser
           show={showModalDeleteUser}
@@ -97,6 +106,8 @@ const ManageUser = (props) => {
           resetDeleteData={resetDeleteData}
           dataDelete={dataDelete}
           fetchListUser={fetchListUser}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         ></ModalDeleteUser>
       </section>
     </div>

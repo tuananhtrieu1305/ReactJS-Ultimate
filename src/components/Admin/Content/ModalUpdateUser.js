@@ -9,7 +9,14 @@ import _ from "lodash";
 import { putUpdateUser } from "../../../services/apiServices";
 
 function ModalUpdateUser(props) {
-  const { show, setShow, fetchListUser, dataUpdate, resetUpdateData } = props;
+  const {
+    show,
+    setShow,
+    fetchListUser,
+    dataUpdate,
+    resetUpdateData,
+    currentPage,
+  } = props;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,7 +50,7 @@ function ModalUpdateUser(props) {
     if (data && data.EC === 0) {
       toast.success(data.EM);
       handleClose();
-      await fetchListUser();
+      await fetchListUser(currentPage);
     }
     if (data && data.EC !== 0) {
       toast.error(data.EM);

@@ -1,6 +1,5 @@
 import Table from "react-bootstrap/Table";
 import ReactPaginate from "react-paginate";
-import { useState } from "react";
 
 const TableUser = (props) => {
   const {
@@ -10,10 +9,13 @@ const TableUser = (props) => {
     handleClickBtnDelete,
     fetchListUser,
     pageCount,
+    setCurrentPage,
+    currentPage,
   } = props;
 
   const handlePageClick = (event) => {
     fetchListUser(+event.selected + 1);
+    setCurrentPage(+event.selected + 1);
   };
 
   return (
@@ -90,6 +92,7 @@ const TableUser = (props) => {
           containerClassName="pagination"
           activeClassName="active"
           renderOnZeroPageCount={null}
+          forcePage={currentPage - 1}
         />
       </div>
     </>
