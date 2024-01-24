@@ -7,10 +7,12 @@ import { postLogin } from "../../services/apiServices";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
+import { CgSpinner } from "react-icons/cg";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const validateEmail = (email) => {
@@ -31,14 +33,18 @@ const Login = (props) => {
       toast.error("Please enter password!");
     }
 
+    setIsLoading(true);
+
     let data = await postLogin(email, password);
     if (data && data.EC === 0) {
       dispatch(doLogin());
       toast.success(data.EM);
+      setIsLoading(false);
       navigate("/");
     }
     if (data && data.EC !== 0) {
       toast.error(data.EM);
+      setIsLoading(false);
     }
   };
 
@@ -88,7 +94,13 @@ const Login = (props) => {
           <button
             className="btn btn-dark"
             onClick={() => handleClickBtnLogin()}
+            disabled={isLoading}
           >
+            {isLoading === true && (
+              <span className="icon-loading">
+                <CgSpinner />
+              </span>
+            )}
             Log in to QuizFun
           </button>
           <div className="btn-decoration">
