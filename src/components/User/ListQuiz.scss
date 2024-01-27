@@ -1,0 +1,28 @@
+.list-quiz-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px 20px;
+  margin-top: 20px;
+  .card {
+    height: 400px;
+    &:hover {
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      transform: translateY(-10px);
+      transition: all 0.2s linear;
+    }
+    &-img-top {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    &-body {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      button {
+        height: 44px;
+      }
+    }
+  }
+}
