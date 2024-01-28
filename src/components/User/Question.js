@@ -2,7 +2,12 @@ import _ from "lodash";
 import Form from "react-bootstrap/Form";
 
 const Question = (props) => {
-  const { data, index } = props;
+  const { data, index, handleCheckbox } = props;
+  const handleClickCheckbox = (event, aId, qId) => {
+    // console.log(event.target.checked);
+    console.log(data, aId, qId);
+    handleCheckbox(aId, qId);
+  };
 
   if (_.isEmpty(data)) {
     return <></>;
@@ -18,7 +23,7 @@ const Question = (props) => {
         )}
       </figure>
       <div className="question-content">
-        <h4 className="question-title">
+        <h4 className="question-title text-center">
           Question {index + 1}: {data.questionDescription} ?
         </h4>
         {data.answers &&
@@ -26,7 +31,14 @@ const Question = (props) => {
           data.answers.map((a, index) => {
             return (
               <div key={`answer-${index}`} className="answer">
-                <Form.Check type={"checkbox"} label={a.description} />
+                <Form.Check
+                  type={"checkbox"}
+                  label={a.description}
+                  checked={a.isSelected}
+                  onChange={(event) =>
+                    handleClickCheckbox(event, a.id, data.questionID)
+                  }
+                />
               </div>
             );
           })}

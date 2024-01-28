@@ -34,6 +34,7 @@ const DetailQuiz = (props) => {
               questionDescription = item.description;
               image = item.image;
             }
+            item.answers.isSelected = false;
             answers.push(item.answers);
           });
           return { questionID: key, answers, questionDescription, image };
@@ -56,6 +57,28 @@ const DetailQuiz = (props) => {
       setIndex(index - 1);
     }
   };
+  const handleFinish = () => {};
+  const handleCheckbox = (answerId, questionID) => {
+    let dataQuizClone = _.cloneDeep(dataQuiz);
+    let question = dataQuizClone.find(
+      (item) => +item.questionID === +questionID
+    );
+    if (question && question.answers) {
+      question.answers = question.answers.map((item) => {
+        if (+item.id === +answerId) {
+          item.isSelected = !item.isSelected;
+        }
+        return item;
+      });
+    }
+    let index = dataQuizClone.findIndex(
+      (item) => +item.questionID === +questionID
+    );
+    if (index > -1) {
+      dataQuizClone[index] = question;
+      setDataQuiz(dataQuizClone);
+    }
+  };
 
   return (
     <div className="detail-quiz-container container">
@@ -66,6 +89,7 @@ const DetailQuiz = (props) => {
         <hr />
         <Question
           index={index}
+          handleCheckbox={handleCheckbox}
           data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
         ></Question>
         <div className="button-group">
@@ -80,6 +104,12 @@ const DetailQuiz = (props) => {
             onClick={() => handleNext()}
           >
             Next
+          </button>
+          <button
+            className="btn btn-outline-danger"
+            onClick={() => handleFinish()}
+          >
+            Finish
           </button>
         </div>
       </section>

@@ -1,9 +1,13 @@
 .detail-quiz-container {
   display: flex;
   gap: 0 10px;
+  margin-top: 50px;
   .left-content {
     width: 70%;
-    padding: 50px 0;
+    padding: 50px;
+    border: 2px solid #ccc;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 8px;
     figure {
       height: 300px;
       width: 50%;
@@ -39,6 +43,9 @@
   }
   .right-content {
     width: 30%;
-    padding: 50px 0 50px 30px;
+    border: 2px solid #ccc;
+    padding: 50px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 8px;
   }
 }
