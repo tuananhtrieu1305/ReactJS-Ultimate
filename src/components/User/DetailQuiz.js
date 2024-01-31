@@ -43,7 +43,6 @@ const DetailQuiz = (props) => {
       setDataQuiz(data);
     }
   };
-  console.log(dataQuiz);
 
   const handleNext = () => {
     if (dataQuiz && dataQuiz.length > index + 1) {
@@ -57,7 +56,30 @@ const DetailQuiz = (props) => {
       setIndex(index - 1);
     }
   };
-  const handleFinish = () => {};
+  const handleFinish = () => {
+    let payload = {
+      quizId: +quizID,
+      answers: [],
+    };
+    let answers = [];
+    if (dataQuiz && dataQuiz.length > 0) {
+      dataQuiz.forEach((question) => {
+        let questionId = question.questionID;
+        let userAnswerId = [];
+        question.answers.forEach((a) => {
+          if (a.isSelected === true) {
+            userAnswerId.push(a.id);
+          }
+        });
+        answers.push({
+          questionId: +questionId,
+          userAnswerId: userAnswerId,
+        });
+      });
+      payload.answers = answers;
+      console.log(payload);
+    }
+  };
   const handleCheckbox = (answerId, questionID) => {
     let dataQuizClone = _.cloneDeep(dataQuiz);
     let question = dataQuizClone.find(
