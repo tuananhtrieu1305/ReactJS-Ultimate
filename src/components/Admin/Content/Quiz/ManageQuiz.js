@@ -119,12 +119,8 @@ const ManageQuiz = () => {
             </section>
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="1">
-          <Accordion.Header>List Quizzes</Accordion.Header>
-          <Accordion.Body>
-            <TableQuiz></TableQuiz>
-          </Accordion.Body>
-        </Accordion.Item>
+        <h4 className="my-4">List Quizzes</h4>
+        <TableQuiz></TableQuiz>
       </Accordion>
     </div>
   );
