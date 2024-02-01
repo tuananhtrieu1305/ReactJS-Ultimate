@@ -12,11 +12,11 @@ import {
   postCreateNewAnswerForQuestion,
   postCreateNewQuestionForQuiz,
 } from "../../../../services/apiServices";
+import { toast } from "react-toastify";
 import _ from "lodash";
 
 const Questions = () => {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [questions, setQuestions] = useState([
+  const initQuestion = [
     {
       id: uuidv4(),
       description: "",
@@ -30,7 +30,10 @@ const Questions = () => {
         },
       ],
     },
-  ]);
+  ];
+
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [questions, setQuestions] = useState(initQuestion);
   const [isPreviewImg, setIsPreviewImg] = useState(false);
   const [dataPreviewImg, setDataPreviewImg] = useState({
     title: "",
@@ -128,26 +131,66 @@ const Questions = () => {
   const handleSubmitQuestionForQuiz = async () => {
     // Todo
     // Validate data
+    if (_.isEmpty(selectedOption)) {
+      toast.error("Please choose a quiz!");
+      return;
+    }
+    let isValidAnswer = true;
+    let indexQ = 0,
+      indexA = 0;
+    for (let i = 0; i < questions.length; i++) {
+      for (let j = 0; j < questions[i].answers.length; j++) {
+        if (!questions[i].answers[j].description) {
+          isValidAnswer = false;
+          indexA = j;
+          break;
+        }
+        indexQ = i;
+        if (isValidAnswer === false) {
+          break;
+        }
+      }
+    }
+    if (isValidAnswer === false) {
+      toast.error(
+        `Answer ${indexA + 1} at question ${indexQ + 1} must be fielded`
+      );
+      return;
+    }
+
+    let isValidQuestion = true;
+    let indexQuestion = 0;
+    for (let i = 0; i < questions.length; i++) {
+      if (!questions[i].description) {
+        isValidQuestion = false;
+        indexQuestion = i;
+        break;
+      }
+    }
+    if (isValidQuestion === false) {
+      toast.error(
+        `Description of question ${indexQuestion + 1} must be fielded`
+      );
+      return;
+    }
     // Submit questions
-    await Promise.all(
-      questions.map(async (question) => {
-        const q = await postCreateNewQuestionForQuiz(
-          +selectedOption.value,
-          question.description,
-          question.imageFile
+    for (const question of questions) {
+      const q = await postCreateNewQuestionForQuiz(
+        +selectedOption.value,
+        question.description,
+        question.imageFile
+      );
+      // Submit answers
+      for (const answer of question.answers) {
+        await postCreateNewAnswerForQuestion(
+          answer.description,
+          answer.isCorrect,
+          q.DT.id
         );
-        // Submit answers
-        await Promise.all(
-          question.answers.map(async (answer) => {
-            await postCreateNewAnswerForQuestion(
-              answer.description,
-              answer.isCorrect,
-              q.DT.id
-            );
-          })
-        );
-      })
-    );
+      }
+    }
+    toast.success("Create questions succeed!");
+    setQuestions(initQuestion);
   };
   const handlePreviewImg = (questionId) => {
     let questionClone = _.cloneDeep(questions);
@@ -176,8 +219,6 @@ const Questions = () => {
   useEffect(() => {
     fetchQuiz();
   }, []);
-
-  console.log(listQuiz);
 
   return (
     <div className="questions-container px-2">
