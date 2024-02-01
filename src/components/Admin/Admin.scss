@@ -79,6 +79,9 @@
         text-overflow: ellipsis;
         word-break: break-word;
         width: 150px;
+        span {
+          cursor: pointer;
+        }
       }
     }
   }

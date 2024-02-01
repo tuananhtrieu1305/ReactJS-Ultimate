@@ -6,6 +6,7 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import { BsTrash } from "react-icons/bs";
 import { MdDriveFolderUpload } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
+import Lightbox from "react-awesome-lightbox";
 import _ from "lodash";
 
 const options = [
@@ -31,6 +32,11 @@ const Questions = () => {
       ],
     },
   ]);
+  const [isPreviewImg, setIsPreviewImg] = useState(false);
+  const [dataPreviewImg, setDataPreviewImg] = useState({
+    title: "",
+    url: "",
+  });
 
   const handleAddRemoveQuestion = (type, id) => {
     if (type === "ADD") {
@@ -122,6 +128,17 @@ const Questions = () => {
   const handleSubmitQuestionForQuiz = () => {
     console.log(questions);
   };
+  const handlePreviewImg = (questionId) => {
+    let questionClone = _.cloneDeep(questions);
+    let index = questionClone.findIndex((item) => item.id === questionId);
+    if (index > -1) {
+      setDataPreviewImg({
+        title: questionClone[index].imageName,
+        url: URL.createObjectURL(questionClone[index].imageFile),
+      });
+      setIsPreviewImg(true);
+    }
+  };
 
   return (
     <div className="questions-container px-2">
@@ -170,9 +187,13 @@ const Questions = () => {
                     }
                   />
                   <span>
-                    {question.imageName
-                      ? question.imageName
-                      : "0 file uploaded"}
+                    {question.imageName ? (
+                      <span onClick={() => handlePreviewImg(question.id)}>
+                        question.imageName
+                      </span>
+                    ) : (
+                      "0 file uploaded"
+                    )}
                   </span>
                 </Form.Group>
                 <div className="action">
@@ -265,6 +286,13 @@ const Questions = () => {
         >
           Save Question
         </button>
+      )}
+      {isPreviewImg === true && (
+        <Lightbox
+          image={dataPreviewImg.url}
+          title={dataPreviewImg.title}
+          onClose={() => setIsPreviewImg(false)}
+        ></Lightbox>
       )}
     </div>
   );
