@@ -19,13 +19,13 @@ const Questions = () => {
   const [questions, setQuestions] = useState([
     {
       id: uuidv4(),
-      description: "d1",
+      description: "",
       imageFile: "",
       imageName: "",
       answers: [
         {
           id: uuidv4(),
-          description: "a1",
+          description: "",
           isCorrect: false,
         },
       ],
@@ -75,6 +75,53 @@ const Questions = () => {
       setQuestions(questionClone);
     }
   };
+  const handleOnChange = (type, questionId, value) => {
+    if (type === "QUESTION") {
+      let questionClone = _.cloneDeep(questions);
+      let index = questionClone.findIndex((item) => item.id === questionId);
+      if (index > -1) {
+        questionClone[index].description = value;
+        setQuestions(questionClone);
+      }
+    }
+  };
+  const handleOnChangeFileQuestion = (questionId, event) => {
+    let questionClone = _.cloneDeep(questions);
+    let index = questionClone.findIndex((item) => item.id === questionId);
+    if (
+      index > -1 &&
+      event.target &&
+      event.target.files &&
+      event.target.files[0]
+    ) {
+      questionClone[index].imageFile = event.target.files[0];
+      questionClone[index].imageName = event.target.files[0].name;
+      setQuestions(questionClone);
+    }
+  };
+  const handleKeyAnswer = (type, answerId, questionId, value) => {
+    let questionClone = _.cloneDeep(questions);
+    let index = questionClone.findIndex((item) => item.id === questionId);
+    if (index > -1) {
+      questionClone[index].answers = questionClone[index].answers.map(
+        (answer) => {
+          if (answer.id === answerId) {
+            if (type === "CHECKBOX") {
+              answer.isCorrect = value;
+            }
+            if (type === "INPUT") {
+              answer.description = value;
+            }
+          }
+          return answer;
+        }
+      );
+      setQuestions(questionClone);
+    }
+  };
+  const handleSubmitQuestionForQuiz = () => {
+    console.log(questions);
+  };
 
   return (
     <div className="questions-container px-2">
@@ -101,17 +148,32 @@ const Questions = () => {
                     type="text"
                     placeholder="Description"
                     value={question.description}
+                    onChange={(event) =>
+                      handleOnChange(
+                        "QUESTION",
+                        question.id,
+                        event.target.value
+                      )
+                    }
                   />
                 </FloatingLabel>
-                <Form.Group
-                  controlId="exampleForm.ControlInput1"
-                  className="upload-form"
-                >
-                  <Form.Label>
+                <Form.Group className="upload-form">
+                  <Form.Label htmlFor={`${question.id}`}>
                     <MdDriveFolderUpload />
                   </Form.Label>
-                  <Form.Control type="file" hidden />
-                  <span>abc.png</span>
+                  <Form.Control
+                    id={`${question.id}`}
+                    type="file"
+                    hidden
+                    onChange={(event) =>
+                      handleOnChangeFileQuestion(question.id, event)
+                    }
+                  />
+                  <span>
+                    {question.imageName
+                      ? question.imageName
+                      : "0 file uploaded"}
+                  </span>
                 </Form.Group>
                 <div className="action">
                   <div
@@ -137,15 +199,33 @@ const Questions = () => {
                 question.answers.map((answer, index) => {
                   return (
                     <section key={answer.id} className="answer-content">
-                      <Form.Check type={"checkbox"} />
+                      <Form.Check
+                        type={"checkbox"}
+                        checked={answer.isCorrect}
+                        onChange={(event) =>
+                          handleKeyAnswer(
+                            "CHECKBOX",
+                            answer.id,
+                            question.id,
+                            event.target.checked
+                          )
+                        }
+                      />
                       <FloatingLabel
-                        controlId="floatingPassword"
                         label={`Answer ${index + 1} 's description`}
                       >
                         <Form.Control
-                          type="text"
+                          type={"text"}
                           placeholder="Answer"
                           value={answer.description}
+                          onChange={(event) =>
+                            handleKeyAnswer(
+                              "INPUT",
+                              answer.id,
+                              question.id,
+                              event.target.value
+                            )
+                          }
                         />
                       </FloatingLabel>
                       <div className="action">
@@ -178,6 +258,14 @@ const Questions = () => {
             </div>
           );
         })}
+      {questions && questions.length > 0 && (
+        <button
+          className="btn btn-success"
+          onClick={() => handleSubmitQuestionForQuiz()}
+        >
+          Save Question
+        </button>
+      )}
     </div>
   );
 };
