@@ -1,16 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Table from "react-bootstrap/Table";
-import { getAllQuizForAdmin } from "../../../../services/apiServices";
 
-const TableQuiz = () => {
-  const [listQuiz, setListQuiz] = useState([]);
-
-  const fetchQuiz = async () => {
-    let res = await getAllQuizForAdmin();
-    if (res && res.EC === 0) {
-      setListQuiz(res.DT);
-    }
-  };
+const TableQuiz = (props) => {
+  const { listQuiz, fetchQuiz, handleClickBtnUpdate, handleClickBtnDelete } =
+    props;
 
   useEffect(() => {
     fetchQuiz();
@@ -39,8 +32,18 @@ const TableQuiz = () => {
                   <td>{item.description}</td>
                   <td className="text-center">{item.difficulty}</td>
                   <td className="d-flex justify-content-center align-items-center gap-2">
-                    <button className="btn btn-secondary">Edit</button>
-                    <button className="btn btn-danger">Delete</button>
+                    <button
+                      className="btn btn-secondary"
+                      onClick={() => handleClickBtnUpdate(item)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => handleClickBtnDelete(item)}
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );

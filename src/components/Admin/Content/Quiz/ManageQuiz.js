@@ -4,7 +4,10 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { postCreateNewQuiz } from "../../../../services/apiServices";
 import TableQuiz from "./TableQuiz";
+import { getAllQuizForAdmin } from "../../../../services/apiServices";
 import Accordion from "react-bootstrap/Accordion";
+import ModalEditQuiz from "./ModalEditQuiz";
+import ModalDeleteQuiz from "./ModalDeleteQuiz";
 
 const options = [
   { value: "EASY", label: "EASY" },
@@ -18,12 +21,35 @@ const ManageQuiz = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [previewImg, setPreviewImg] = useState("");
   const [image, setImage] = useState("");
+  const [showModalEditQuiz, setShowModalEditQuiz] = useState(false);
+  const [showModalDeleteQuiz, setShowModalDeleteQuiz] = useState(false);
+  const [dataUpdate, setDataUpdate] = useState({});
+  const [dataDelete, setDataDelete] = useState({});
+  const [listQuiz, setListQuiz] = useState([]);
+
+  const fetchQuiz = async () => {
+    let res = await getAllQuizForAdmin();
+    if (res && res.EC === 0) {
+      setListQuiz(res.DT);
+    }
+  };
 
   const handleUploadImg = (event) => {
     if (event.target && event.target.files && event.target.files[0]) {
       setPreviewImg(URL.createObjectURL(event.target.files[0]));
       setImage(event.target.files[0]);
     }
+  };
+  const handleClickBtnUpdate = (user) => {
+    setShowModalEditQuiz(true);
+    setDataUpdate(user);
+  };
+  const resetUpdateData = () => {
+    setDataUpdate({});
+  };
+  const handleClickBtnDelete = (user) => {
+    setShowModalDeleteQuiz(true);
+    setDataDelete(user);
   };
 
   const handleCreateQuiz = async () => {
@@ -44,14 +70,15 @@ const ManageQuiz = () => {
       setDescription("");
       setSelectedOption("");
       setImage(null);
+      fetchQuiz();
     } else {
       toast.error(res.EM);
     }
   };
 
   return (
-    <div className="quiz-container">
-      <Accordion defaultActiveKey="0">
+    <div className="quiz-container px-2">
+      <Accordion>
         <Accordion.Item eventKey="0">
           <Accordion.Header>Manage Quizzes</Accordion.Header>
           <Accordion.Body>
@@ -120,7 +147,25 @@ const ManageQuiz = () => {
           </Accordion.Body>
         </Accordion.Item>
         <h4 className="my-4">List Quizzes</h4>
-        <TableQuiz></TableQuiz>
+        <TableQuiz
+          listQuiz={listQuiz}
+          fetchQuiz={fetchQuiz}
+          handleClickBtnDelete={handleClickBtnDelete}
+          handleClickBtnUpdate={handleClickBtnUpdate}
+        ></TableQuiz>
+        <ModalEditQuiz
+          show={showModalEditQuiz}
+          setShow={setShowModalEditQuiz}
+          dataUpdate={dataUpdate}
+          resetUpdateData={resetUpdateData}
+          fetchQuiz={fetchQuiz}
+        ></ModalEditQuiz>
+        <ModalDeleteQuiz
+          show={showModalDeleteQuiz}
+          setShow={setShowModalDeleteQuiz}
+          dataDelete={dataDelete}
+          fetchQuiz={fetchQuiz}
+        ></ModalDeleteQuiz>
       </Accordion>
     </div>
   );

@@ -1,5 +1,4 @@
 import App from "./App";
-import User from "./components/User/User";
 import Admin from "./components/Admin/Admin";
 import HomePage from "./components/Home/HomePage";
 import DashBoard from "./components/Admin/Content/DashBoard";
@@ -12,6 +11,7 @@ import Signup from "./components/Auth/Signup";
 import ListQuiz from "./components/User/ListQuiz";
 import DetailQuiz from "./components/User/DetailQuiz";
 import ManageQuiz from "./components/Admin/Content/Quiz/ManageQuiz";
+import Questions from "./components/Admin/Content/Questions/Questions";
 
 const NotFound = () => {
   return (
@@ -20,7 +20,7 @@ const NotFound = () => {
     </div>
   );
 };
-const Layout = (props) => {
+const Layout = () => {
   return (
     <>
       <Routes>
@@ -33,6 +33,7 @@ const Layout = (props) => {
           <Route index element={<DashBoard></DashBoard>} />
           <Route path="manage-users" element={<ManageUser></ManageUser>} />
           <Route path="manage-quizzes" element={<ManageQuiz></ManageQuiz>} />
+          <Route path="manage-questions" element={<Questions></Questions>} />
         </Route>
         <Route path="/login" element={<Login></Login>} />
         <Route path="/signup" element={<Signup></Signup>} />
