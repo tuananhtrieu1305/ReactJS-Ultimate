@@ -1,5 +1,5 @@
 import Select from "react-select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { IoAddCircleOutline } from "react-icons/io5";
@@ -7,13 +7,12 @@ import { BsTrash } from "react-icons/bs";
 import { MdDriveFolderUpload } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
 import Lightbox from "react-awesome-lightbox";
+import {
+  getAllQuizForAdmin,
+  postCreateNewAnswerForQuestion,
+  postCreateNewQuestionForQuiz,
+} from "../../../../services/apiServices";
 import _ from "lodash";
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
 
 const Questions = () => {
   const [selectedOption, setSelectedOption] = useState(null);
@@ -37,6 +36,7 @@ const Questions = () => {
     title: "",
     url: "",
   });
+  const [listQuiz, setListQuiz] = useState([]);
 
   const handleAddRemoveQuestion = (type, id) => {
     if (type === "ADD") {
@@ -125,8 +125,29 @@ const Questions = () => {
       setQuestions(questionClone);
     }
   };
-  const handleSubmitQuestionForQuiz = () => {
-    console.log(questions);
+  const handleSubmitQuestionForQuiz = async () => {
+    // Todo
+    // Validate data
+    // Submit questions
+    await Promise.all(
+      questions.map(async (question) => {
+        const q = await postCreateNewQuestionForQuiz(
+          +selectedOption.value,
+          question.description,
+          question.imageFile
+        );
+        // Submit answers
+        await Promise.all(
+          question.answers.map(async (answer) => {
+            await postCreateNewAnswerForQuestion(
+              answer.description,
+              answer.isCorrect,
+              q.DT.id
+            );
+          })
+        );
+      })
+    );
   };
   const handlePreviewImg = (questionId) => {
     let questionClone = _.cloneDeep(questions);
@@ -139,6 +160,24 @@ const Questions = () => {
       setIsPreviewImg(true);
     }
   };
+  const fetchQuiz = async () => {
+    let res = await getAllQuizForAdmin();
+    if (res && res.EC === 0) {
+      let newQuiz = res.DT.map((item) => {
+        return {
+          value: item.id,
+          label: `${item.id} - ${item.description}`,
+        };
+      });
+      setListQuiz(newQuiz);
+    }
+  };
+
+  useEffect(() => {
+    fetchQuiz();
+  }, []);
+
+  console.log(listQuiz);
 
   return (
     <div className="questions-container px-2">
@@ -147,7 +186,7 @@ const Questions = () => {
       <Select
         defaultValue={selectedOption}
         onChange={setSelectedOption}
-        options={options}
+        options={listQuiz}
         placeholder={""}
       />
       <h6 className="mt-3">Add question:</h6>
