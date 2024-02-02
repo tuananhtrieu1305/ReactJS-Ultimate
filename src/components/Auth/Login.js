@@ -47,6 +47,11 @@ const Login = (props) => {
       setIsLoading(false);
     }
   };
+  const handleKeyDown = (event) => {
+    if (event && event.key === "Enter") {
+      handleClickBtnLogin();
+    }
+  };
 
   return (
     <div className="login-container">
@@ -84,6 +89,7 @@ const Login = (props) => {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
               placeholder="*****"
+              onKeyDown={(event) => handleKeyDown(event)}
             />
           </div>
         </form>
