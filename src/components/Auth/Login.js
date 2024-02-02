@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
 import { CgSpinner } from "react-icons/cg";
+import Language from "../Header/Language";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
@@ -66,6 +67,7 @@ const Login = (props) => {
         <a href="#!" className="text-secondary">
           Contact us
         </a>
+        <Language></Language>
       </section>
       <section className="col-3 container mt-4 login-content">
         <h1 className="text-center">QuizFun</h1>

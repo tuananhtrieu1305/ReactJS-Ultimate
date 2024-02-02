@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { FaEye } from "react-icons/fa";
 import { postSignup } from "../../services/apiServices";
 import { IoMdEyeOff } from "react-icons/io";
+import Language from "../Header/Language";
 
 const Signup = (props) => {
   const [email, setEmail] = useState("");
@@ -53,6 +54,7 @@ const Signup = (props) => {
         >
           Log in
         </button>
+        <Language></Language>
       </section>
       <section className="col-3 container mt-4 login-content">
         <h1 className="text-center">QuizFun</h1>
