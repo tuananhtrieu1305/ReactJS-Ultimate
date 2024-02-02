@@ -1,7 +1,10 @@
 import _ from "lodash";
+import Lightbox from "react-awesome-lightbox";
 import Form from "react-bootstrap/Form";
+import { useState } from "react";
 
 const Question = (props) => {
+  const [isPreviewImg, setIsPreviewImg] = useState(false);
   const { data, index, handleCheckbox } = props;
   const handleClickCheckbox = (event, aId, qId) => {
     // console.log(event.target.checked);
@@ -14,13 +17,24 @@ const Question = (props) => {
 
   return (
     <>
-      <figure>
-        {data.image ? (
-          <img src={`data:image/jpeg;base64,${data.image}`} alt="" />
-        ) : (
-          <span>NO IMAGE</span>
-        )}
-      </figure>
+      {data.image ? (
+        <figure>
+          <img
+            src={`data:image/jpeg;base64,${data.image}`}
+            alt=""
+            onClick={() => setIsPreviewImg(true)}
+          />
+          {isPreviewImg === true && (
+            <Lightbox
+              image={`data:image/jpeg;base64,${data.image}`}
+              title={"Question Image"}
+              onClose={() => setIsPreviewImg(false)}
+            ></Lightbox>
+          )}
+        </figure>
+      ) : (
+        <span className="backup-text">NO IMAGE</span>
+      )}
       <div className="question-content">
         <h4 className="question-title text-center">
           Question {index + 1}: {data.questionDescription} ?
