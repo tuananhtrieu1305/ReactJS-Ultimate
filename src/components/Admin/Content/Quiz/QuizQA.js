@@ -12,6 +12,7 @@ import {
   postCreateNewAnswerForQuestion,
   getQuizWithQA,
   postCreateNewQuestionForQuiz,
+  postUpsertQA,
 } from "../../../../services/apiServices";
 import { toast } from "react-toastify";
 import _ from "lodash";
@@ -175,24 +176,28 @@ const QuizQA = () => {
       return;
     }
     // Submit questions
-    for (const question of questions) {
-      const q = await postCreateNewQuestionForQuiz(
-        +selectedOption.value,
-        question.description,
-        question.imageFile
-      );
-      // Submit answers
-      for (const answer of question.answers) {
-        await postCreateNewAnswerForQuestion(
-          answer.description,
-          answer.isCorrect,
-          q.DT.id
-        );
+    let questionClone = _.clone(questions);
+    for (let i = 0; i < questionClone.length; i++) {
+      if (questionClone[i].imageFile) {
+        questionClone[i].imageFile = await toBase64(questionClone[i].imageFile);
       }
     }
-    toast.success("Create questions succeed!");
-    setQuestions(initQuestion);
+    let res = await postUpsertQA({
+      quizId: selectedOption.value,
+      questions: questionClone,
+    });
+    if (res && res.EC === 0) {
+      toast.success(res.EM);
+      fetchQuizWithQA();
+    }
   };
+  const toBase64 = (file) =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = reject;
+    });
   const handlePreviewImg = (questionId) => {
     let questionClone = _.cloneDeep(questions);
     let index = questionClone.findIndex((item) => item.id === questionId);
