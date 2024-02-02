@@ -20,6 +20,9 @@ const putUpdateUser = (id, username, role, image) => {
 const getAllUsers = (page, limit) => {
   return axios.get(`api/v1/participant?page=${page}&limit=${limit}`);
 };
+const getAllUsersWithoutPaginate = () => {
+  return axios.get(`api/v1/participant/all`);
+};
 const deleteUser = (userID) => {
   return axios.delete("api/v1/participant", { data: { id: userID } });
 };
@@ -96,4 +99,5 @@ export {
   deleteQuiz,
   postCreateNewQuestionForQuiz,
   postCreateNewAnswerForQuestion,
+  getAllUsersWithoutPaginate,
 };

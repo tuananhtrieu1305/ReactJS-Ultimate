@@ -8,6 +8,8 @@ import { getAllQuizForAdmin } from "../../../../services/apiServices";
 import Accordion from "react-bootstrap/Accordion";
 import ModalEditQuiz from "./ModalEditQuiz";
 import ModalDeleteQuiz from "./ModalDeleteQuiz";
+import QuizQA from "./QuizQA";
+import AssignQuiz from "./AssignQuiz";
 
 const options = [
   { value: "EASY", label: "EASY" },
@@ -146,13 +148,29 @@ const ManageQuiz = () => {
             </section>
           </Accordion.Body>
         </Accordion.Item>
-        <h4 className="my-4">List Quizzes</h4>
-        <TableQuiz
-          listQuiz={listQuiz}
-          fetchQuiz={fetchQuiz}
-          handleClickBtnDelete={handleClickBtnDelete}
-          handleClickBtnUpdate={handleClickBtnUpdate}
-        ></TableQuiz>
+        <Accordion.Item eventKey="1">
+          <Accordion.Header>List Quizzes</Accordion.Header>
+          <Accordion.Body>
+            <TableQuiz
+              listQuiz={listQuiz}
+              fetchQuiz={fetchQuiz}
+              handleClickBtnDelete={handleClickBtnDelete}
+              handleClickBtnUpdate={handleClickBtnUpdate}
+            ></TableQuiz>
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="2">
+          <Accordion.Header>Update Q/A Quizzes</Accordion.Header>
+          <Accordion.Body>
+            <QuizQA></QuizQA>
+          </Accordion.Body>
+        </Accordion.Item>
+        <Accordion.Item eventKey="3">
+          <Accordion.Header>Assign to Users</Accordion.Header>
+          <Accordion.Body>
+            <AssignQuiz></AssignQuiz>
+          </Accordion.Body>
+        </Accordion.Item>
         <ModalEditQuiz
           show={showModalEditQuiz}
           setShow={setShowModalEditQuiz}
