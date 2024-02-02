@@ -1,9 +1,16 @@
+import Timer from "./Timer";
+
 const QuizControl = (props) => {
-  const { dataQuiz } = props;
+  const { dataQuiz, handleFinish } = props;
+  const isTimeUp = () => {
+    handleFinish();
+  };
 
   return (
     <>
-      <section className="timer h1 text-center">10:10</section>
+      <section className="timer h1 text-center">
+        <Timer isTimeUp={isTimeUp}></Timer>
+      </section>
       <hr />
       <section className="question-list">
         {dataQuiz &&

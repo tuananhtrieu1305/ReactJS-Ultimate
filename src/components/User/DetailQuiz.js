@@ -151,7 +151,10 @@ const DetailQuiz = (props) => {
         </div>
       </section>
       <section className="right-content">
-        <QuizControl dataQuiz={dataQuiz}></QuizControl>
+        <QuizControl
+          dataQuiz={dataQuiz}
+          handleFinish={handleFinish}
+        ></QuizControl>
       </section>
       <ModalResult
         show={isShowModalResult}
