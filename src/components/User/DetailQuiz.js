@@ -154,6 +154,7 @@ const DetailQuiz = (props) => {
         <QuizControl
           dataQuiz={dataQuiz}
           handleFinish={handleFinish}
+          setIndex={setIndex}
         ></QuizControl>
       </section>
       <ModalResult
