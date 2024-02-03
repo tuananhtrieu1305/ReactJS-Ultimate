@@ -97,6 +97,9 @@ const postUpsertQA = (data) => {
 const postLogout = (email, refresh_token) => {
   return axios.post(`api/v1/logout`, { email, refresh_token });
 };
+const getOverview = () => {
+  return axios.get(`api/v1/overview`);
+};
 
 export {
   postCreateNewUser,
@@ -119,4 +122,5 @@ export {
   getQuizWithQA,
   postUpsertQA,
   postLogout,
+  getOverview,
 };

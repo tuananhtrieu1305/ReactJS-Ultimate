@@ -1,11 +1,9 @@
 .dashboard-container {
-  margin-top: 10px;
+  margin-top: 40px;
   .dashboard-content {
-    border: 1px solid red;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 0 20px;
     .c-left {
       width: 40%;
       display: grid;
@@ -13,11 +11,33 @@
       grid-gap: 20px;
       .board {
         height: 200px;
-        border: 1px solid green;
+        border: 2px solid #333;
+        border-radius: 12px;
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
+        transition: all 0.2s linear;
+        &:hover {
+          transform: translateY(-5px);
+          background: #7d75ba;
+          color: #fff;
+          box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+          border-color: #78b1c4;
+        }
+        &-name {
+          font-size: 18px;
+          margin-bottom: 10px;
+        }
+        &-stats {
+          font-size: 22px;
+          font-weight: 600;
+        }
       }
+    }
+    .c-right {
+      width: 50%;
+      height: 50vh;
     }
   }
 }
