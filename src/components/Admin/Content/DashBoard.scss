@@ -1,0 +1,23 @@
+.dashboard-container {
+  margin-top: 10px;
+  .dashboard-content {
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0 20px;
+    .c-left {
+      width: 40%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+      .board {
+        height: 200px;
+        border: 1px solid green;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}

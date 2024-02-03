@@ -12,6 +12,12 @@
     height: calc(100vh - 10px);
     .admin-header {
       height: 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .right_header {
+        margin-right: 100px;
+      }
       svg {
         cursor: pointer;
       }
