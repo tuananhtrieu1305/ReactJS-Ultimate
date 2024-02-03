@@ -1,0 +1,22 @@
+{
+  "homepage_content": {
+    "homepage_title": "Forms that break the norm",
+    "homepage_desc": "Get more data—like signups, feedback, and anything else—with forms designed to be ",
+    "homepage_desc_2": "refreshingly different.",
+    "homepage_start": "Get started-It's free",
+    "homepage_get_quiz": "Get your quiz"
+  },
+  "right_header": {
+    "vi_lang": "Vietnamese",
+    "en_lang": "English",
+    "login": "Log in",
+    "signup": "Sign up",
+    "profile": "Profile",
+    "logout": "Log out"
+  },
+  "nav_bar": {
+    "nav_bar_link1": "Home",
+    "nav_bar_link2": "User",
+    "nav_bar_link3": "Admin"
+  }
+}

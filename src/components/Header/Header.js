@@ -8,10 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { postLogout } from "../../services/apiServices";
 import { toast } from "react-toastify";
 import { doLogout } from "../../redux/action/userAction";
+import { useTranslation } from "react-i18next";
 import Language from "./Language";
 
 const Header = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
   const dispatch = useDispatch();
@@ -52,42 +54,47 @@ const Header = () => {
         </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <NavLink to="/" className="nav-link">
-              Home
+          <Nav className="me-auto nav_bar">
+            <NavLink to="/" className="nav-link nav_bar_link1">
+              {t("nav_bar.nav_bar_link1")}
             </NavLink>
-            <NavLink to="/users" className="nav-link">
-              User
+            <NavLink to="/users" className="nav-link nav_bar_link2">
+              {t("nav_bar.nav_bar_link2")}
             </NavLink>
-            <NavLink to="/admins" className="nav-link">
-              Admin
+            <NavLink to="/admins" className="nav-link nav_bar_link3">
+              {t("nav_bar.nav_bar_link3")}
             </NavLink>
           </Nav>
-          <Nav>
+          <Nav className="right_header">
             {isAuthenticated === false ? (
               <>
                 <button
-                  className="btn btn-outline-dark"
+                  className="btn btn-outline-dark login"
                   onClick={() => handleLogin()}
                 >
-                  Log in
+                  {t("right_header.login")}
                 </button>
                 <button
-                  className="btn btn-dark mx-3"
+                  className="btn btn-dark mx-3 signup"
                   onClick={() => handleSignup()}
                 >
-                  Sign up
+                  {t("right_header.signup")}
                 </button>
               </>
             ) : (
               <NavDropdown
-                title="Settings"
+                title={i18n.language === "vi" ? "Cài đặt" : "Settings"}
                 id="basic-nav-dropdown"
                 className="mx-4"
               >
-                <NavDropdown.Item>Profiles</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => handleLogout()}>
-                  Log out
+                <NavDropdown.Item className="profile">
+                  {t("right_header.profile")}
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  onClick={() => handleLogout()}
+                  className="logout"
+                >
+                  {t("right_header.logout")}
                 </NavDropdown.Item>
               </NavDropdown>
             )}
