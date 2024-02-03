@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import "./DashBoard.scss";
 import {
@@ -13,6 +14,7 @@ import {
 import { getOverview } from "../../../services/apiServices";
 
 const DashBoard = (props) => {
+  const { t } = useTranslation();
   const [dataOverview, setDataOverview] = useState([]);
   const [dataChart, setDataChart] = useState([]);
 
@@ -51,12 +53,16 @@ const DashBoard = (props) => {
   };
 
   return (
-    <div className="dashboard-container">
-      <h2 className="mb-4">Analytics Dashboard</h2>
+    <div className="dashboard-container dashboard_container">
+      <h2 className="mb-4 dashboard_heading">
+        {t("dashboard_container.dashboard_heading")}
+      </h2>
       <section className="dashboard-content">
         <section className="c-left">
           <div className="board">
-            <span className="board-name">Total Users</span>
+            <span className="board-name dashboard_total_user">
+              {t("dashboard_container.dashboard_total_user")}
+            </span>
             <span className="board-stats">
               {dataOverview &&
               dataOverview.users &&
@@ -68,7 +74,9 @@ const DashBoard = (props) => {
             </span>
           </div>
           <div className="board">
-            <span className="board-name">Total Quizzes</span>
+            <span className="board-name dashboard_total_quiz">
+              {t("dashboard_container.dashboard_total_quiz")}
+            </span>
             <span className="board-stats">
               {dataOverview &&
               dataOverview.others &&
@@ -80,7 +88,9 @@ const DashBoard = (props) => {
             </span>
           </div>
           <div className="board">
-            <span className="board-name">Total Questions</span>
+            <span className="board-name dashboard_total_question">
+              {t("dashboard_container.dashboard_total_question")}
+            </span>
             <span className="board-stats">
               {dataOverview &&
               dataOverview.others &&
@@ -92,7 +102,9 @@ const DashBoard = (props) => {
             </span>
           </div>
           <div className="board">
-            <span className="board-name">Total Answers</span>
+            <span className="board-name dashboard_total_answer">
+              {t("dashboard_container.dashboard_total_answer")}
+            </span>
             <span className="board-stats">
               {dataOverview &&
               dataOverview.others &&

@@ -50,3 +50,14 @@ body {
 .react-slidedown {
   background: transparent !important;
 }
+
+.breadcrumb {
+  padding-top: 20px;
+  .breadcrumb-item {
+    color: #6c757d !important;
+    text-decoration: none !important;
+    &.active {
+      color: #2cccff !important;
+    }
+  }
+}

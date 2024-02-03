@@ -18,5 +18,54 @@
     "nav_bar_link1": "Home",
     "nav_bar_link2": "User",
     "nav_bar_link3": "Admin"
+  },
+  "card_question": {
+    "card_title": "Quiz",
+    "card_btn": "Check it out"
+  },
+  "detail_quiz_container": {
+    "question_header": "Quiz",
+    "btn_prev": "Prev",
+    "btn_next": "Next",
+    "btn_finish": "Finish",
+    "backup_text": "NO IMAGE",
+    "question_title": "Question",
+    "quiz_result_header": "Quiz Result",
+    "quiz_result_question": "Total Question",
+    "quiz_result_answer": "Total Correct Answers",
+    "quiz_show_btn": "Show answers",
+    "quiz_close_btn": "Close"
+  },
+  "nav_breadcrumb": {
+    "breadcrumb_home": "Home",
+    "breadcrumb_user": "User",
+    "breadcrumb_quiz": "Quiz"
+  },
+  "admin": {
+    "dashboard_section": "Dashboard",
+    "manage_user_section": "Manage User",
+    "manage_quiz_form_section": "Manage Quiz Form",
+    "manage_quiz_section": "Manage Quiz",
+    "help_link": "Help"
+  },
+  "dashboard_container": {
+    "dashboard_heading": "Analytics Dashboard",
+    "dashboard_total_user": "Total Users",
+    "dashboard_total_quiz": "Total Quizzes",
+    "dashboard_total_question": "Total Questions",
+    "dashboard_total_answer": "Total Answers"
+  },
+  "manage_user_container": {
+    "m_heading": "Manage User",
+    "m_btn_add": "Add new user",
+    "table_id": "ID",
+    "table_username": "USERNAME",
+    "table_email": "EMAIL",
+    "table_role": "ROLE",
+    "table_action": "ACTION",
+    "table_btn_view": "View",
+    "table_btn_update": "Update",
+    "table_btn_delete": "Delete",
+    "table_not_found": "Not found data"
   }
 }

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import "react-pro-sidebar/dist/css/styles.css";
 import {
   ProSidebar,
@@ -15,6 +16,7 @@ import logo from "../../assets/images/logo.svg";
 import "../../App.scss";
 
 const SideBar = (props) => {
+  const { t, i18n } = useTranslation();
   const { collapsed, toggled, handleToggleSidebar } = props;
   return (
     <>
@@ -57,23 +59,26 @@ const SideBar = (props) => {
 
         <SidebarContent>
           <Menu iconShape="circle">
-            <MenuItem icon={<FaTachometerAlt />}>
-              dashboard
+            <MenuItem icon={<FaTachometerAlt />} className="dashboard_section">
+              {t("admin.dashboard_section")}
               <Link to="/admins"></Link>
             </MenuItem>
           </Menu>
           <Menu iconShape="circle">
-            <SubMenu icon={<FaRegLaughWink />} title="Features">
-              <MenuItem>
-                Manage User
+            <SubMenu
+              icon={<FaRegLaughWink />}
+              title={i18n.language === "vi" ? "Chức năng" : "Features"}
+            >
+              <MenuItem className="manage_user_section">
+                {t("admin.manage_user_section")}
                 <Link to="/admins/manage-users"></Link>
               </MenuItem>
-              <MenuItem>
-                Manage Quiz Form
+              <MenuItem className="manage_quiz_form_section">
+                {t("admin.manage_quiz_form_section")}
                 <Link to="/admins/manage-quizzes"></Link>
               </MenuItem>
-              <MenuItem>
-                Manage Quiz
+              <MenuItem className="manage_quiz_section">
+                {t("admin.manage_quiz_section")}
                 <Link to="/admins/manage-questions"></Link>
               </MenuItem>
             </SubMenu>
@@ -100,8 +105,9 @@ const SideBar = (props) => {
                   textOverflow: "ellipsis",
                   overflow: "hidden",
                 }}
+                className="help_link"
               >
-                Help?
+                {t("admin.help_link")}?
               </span>
             </a>
           </div>

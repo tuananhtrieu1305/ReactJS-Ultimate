@@ -5,7 +5,10 @@ import _ from "lodash";
 import "./DetailQuiz.scss";
 import Question from "./Question";
 import ModalResult from "./ModalResult";
+import { useTranslation } from "react-i18next";
 import QuizControl from "./QuizControl/QuizControl";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
+import { NavLink } from "react-router-dom";
 
 const DetailQuiz = (props) => {
   const param = useParams();
@@ -116,53 +119,68 @@ const DetailQuiz = (props) => {
       setDataQuiz(dataQuizClone);
     }
   };
+  const { t } = useTranslation();
 
   return (
-    <div className="detail-quiz-container container">
-      <section className="left-content">
-        <h1>
-          Quiz {quizID}: {location?.state?.questionTitle}
-        </h1>
-        <hr />
-        <Question
-          index={index}
-          handleCheckbox={handleCheckbox}
-          data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
-        ></Question>
-        <div className="button-group">
-          <button
-            className="btn btn-outline-success"
-            onClick={() => handlePrev()}
-          >
-            Prev
-          </button>
-          <button
-            className="btn btn-outline-success"
-            onClick={() => handleNext()}
-          >
-            Next
-          </button>
-          <button
-            className="btn btn-outline-danger"
-            onClick={() => handleFinish()}
-          >
-            Finish
-          </button>
-        </div>
-      </section>
-      <section className="right-content">
-        <QuizControl
-          dataQuiz={dataQuiz}
-          handleFinish={handleFinish}
-          setIndex={setIndex}
-        ></QuizControl>
-      </section>
-      <ModalResult
-        show={isShowModalResult}
-        setShow={setIsShowModalResult}
-        dataModalResult={dataModalResult}
-      ></ModalResult>
-    </div>
+    <>
+      <Breadcrumb className="container nav_breadcrumb">
+        <NavLink className="breadcrumb-item breadcrumb_home" to="/">
+          {t("nav_breadcrumb.breadcrumb_home")}
+        </NavLink>
+        <NavLink className="breadcrumb-item breadcrumb_user" to="/users">
+          {t("nav_breadcrumb.breadcrumb_user")}
+        </NavLink>
+        <Breadcrumb.Item className="breadcrumb_quiz" active>
+          {t("nav_breadcrumb.breadcrumb_quiz")}
+        </Breadcrumb.Item>
+      </Breadcrumb>
+      <div className="detail-quiz-container container detail_quiz_container">
+        <section className="left-content">
+          <h1 className="question_header">
+            {t("detail_quiz_container.question_header")} {quizID}:{" "}
+            {location?.state?.questionTitle}
+          </h1>
+          <hr />
+          <Question
+            index={index}
+            handleCheckbox={handleCheckbox}
+            data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
+          ></Question>
+          <div className="button-group">
+            <button
+              className="btn btn-outline-success btn_prev"
+              onClick={() => handlePrev()}
+            >
+              {t("detail_quiz_container.btn_prev")}
+            </button>
+            <button
+              className="btn btn-outline-success btn_next"
+              onClick={() => handleNext()}
+            >
+              {t("detail_quiz_container.btn_next")}
+            </button>
+            <button
+              className="btn btn-outline-danger btn_finish"
+              onClick={() => handleFinish()}
+            >
+              {t("detail_quiz_container.btn_finish")}
+            </button>
+          </div>
+        </section>
+        <section className="right-content">
+          <QuizControl
+            dataQuiz={dataQuiz}
+            handleFinish={handleFinish}
+            setIndex={setIndex}
+          ></QuizControl>
+        </section>
+        <ModalResult
+          show={isShowModalResult}
+          setShow={setIsShowModalResult}
+          dataModalResult={dataModalResult}
+        ></ModalResult>
+      </div>
+    </>
   );
 };
 

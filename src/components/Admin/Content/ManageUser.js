@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 import { getAllUsers } from "../../../services/apiServices";
 import ModalUpdateUser from "./ModalUpdateUser";
 import ModalViewUser from "./ModalViewUser";
+import { useTranslation } from "react-i18next";
 import ModalDeleteUser from "./ModalDeleteUser";
 
 const ManageUser = (props) => {
+  const { t } = useTranslation();
   const LIMIT_USER = 3;
 
   const [showModalCreateUser, setShowModalCreateUser] = useState(false);
@@ -53,15 +55,15 @@ const ManageUser = (props) => {
   };
 
   return (
-    <div className="manage-user-container">
-      <h1 className="mb-3">Manage User</h1>
+    <div className="manage-user-container manage_user_container">
+      <h1 className="mb-3 m_heading">{t("manage_user_container.m_heading")}</h1>
       <section className="user-content">
         <div className="manage-user-buttons">
           <button
-            className="btn btn-primary d-flex align-items-center justify-content-center gap-2"
+            className="btn btn-primary d-flex align-items-center justify-content-center gap-2 m_btn_add"
             onClick={() => setShowModalCreateUser(true)}
           >
-            <FaPlusCircle /> Add new user
+            <FaPlusCircle /> {t("manage_user_container.m_btn_add")}
           </button>
         </div>
         <section className="table-user mt-5">

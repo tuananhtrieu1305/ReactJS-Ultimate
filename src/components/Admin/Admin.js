@@ -34,7 +34,7 @@ const Admin = (props) => {
   };
 
   return (
-    <div className="admin-container">
+    <div className="admin-container admin">
       <div className="admin-sidebar">
         <SideBar collapsed={collapsed} />
       </div>

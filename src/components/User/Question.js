@@ -1,9 +1,11 @@
 import _ from "lodash";
 import Lightbox from "react-awesome-lightbox";
+import { useTranslation } from "react-i18next";
 import Form from "react-bootstrap/Form";
 import { useState } from "react";
 
 const Question = (props) => {
+  const { t } = useTranslation();
   const [isPreviewImg, setIsPreviewImg] = useState(false);
   const { data, index, handleCheckbox } = props;
   const handleClickCheckbox = (event, aId, qId) => {
@@ -33,11 +35,14 @@ const Question = (props) => {
           )}
         </figure>
       ) : (
-        <span className="backup-text">NO IMAGE</span>
+        <span className="backup-text backup_text">
+          {t("detail_quiz_container.backup_text")}
+        </span>
       )}
       <div className="question-content">
-        <h4 className="question-title text-center">
-          Question {index + 1}: {data.questionDescription} ?
+        <h4 className="question-title text-center question_title">
+          {t("detail_quiz_container.question_title")} {index + 1}:{" "}
+          {data.questionDescription} ?
         </h4>
         {data.answers &&
           data.answers.length &&

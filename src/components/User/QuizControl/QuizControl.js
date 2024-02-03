@@ -28,6 +28,7 @@ const QuizControl = (props) => {
           dataQuiz.map((item, index) => {
             return (
               <div
+                key={`question-${index}`}
                 className={getClassQuestion(index, item)}
                 onClick={() => setIndex(index)}
               >

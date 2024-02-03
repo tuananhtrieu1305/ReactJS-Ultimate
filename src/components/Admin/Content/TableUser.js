@@ -1,7 +1,9 @@
 import Table from "react-bootstrap/Table";
+import { useTranslation } from "react-i18next";
 import ReactPaginate from "react-paginate";
 
 const TableUser = (props) => {
+  const { t } = useTranslation();
   const {
     listUser,
     handleClickBtnUpdate,
@@ -23,11 +25,21 @@ const TableUser = (props) => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th className="text-center">ID</th>
-            <th>USERNAME</th>
-            <th>EMAIL</th>
-            <th className="text-center">ROLE</th>
-            <th className="text-center">ACTION</th>
+            <th className="text-center table_id">
+              {t("manage_user_container.table_id")}
+            </th>
+            <th className="table_username">
+              {t("manage_user_container.table_username")}
+            </th>
+            <th className="table_email">
+              {t("manage_user_container.table_email")}
+            </th>
+            <th className="text-center table_role">
+              {t("manage_user_container.table_role")}
+            </th>
+            <th className="text-center table_action">
+              {t("manage_user_container.table_action")}
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -42,22 +54,22 @@ const TableUser = (props) => {
                   <td className="text-center">{item.role}</td>
                   <td className="text-center">
                     <button
-                      className="btn btn-success"
+                      className="btn btn-success table_btn_view"
                       onClick={() => handleClickBtnView(item)}
                     >
-                      View
+                      {t("manage_user_container.table_btn_view")}
                     </button>
                     <button
-                      className="btn btn-warning mx-2"
+                      className="btn btn-warning mx-2 table_btn_update"
                       onClick={() => handleClickBtnUpdate(item)}
                     >
-                      Update
+                      {t("manage_user_container.table_btn_update")}
                     </button>
                     <button
-                      className="btn btn-danger"
+                      className="btn btn-danger table_btn_delete"
                       onClick={() => handleClickBtnDelete(item)}
                     >
-                      Delete
+                      {t("manage_user_container.table_btn_delete")}
                     </button>
                   </td>
                 </tr>
@@ -65,8 +77,8 @@ const TableUser = (props) => {
             })}
           {listUser && listUser.length === 0 && (
             <tr>
-              <td colSpan={5} className="text-center">
-                Not found data
+              <td colSpan={5} className="text-center table_not_found">
+                {t("manage_user_container.table_not_found")}
               </td>
             </tr>
           )}
