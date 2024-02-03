@@ -1,0 +1,71 @@
+{
+  "homepage_content": {
+    "homepage_title": "Các hình thức phá vỡ chuẩn mực",
+    "homepage_desc": "Nhận được nhiều dữ liệu hơn—như đăng ký, phản hồi và bất kỳ dữ liệu nào khác—với các biểu mẫu được thiết kế ",
+    "homepage_desc_2": "hoàn toàn khác biệt.",
+    "homepage_start": "Bắt đầu hoàn toàn miễn phí",
+    "homepage_get_quiz": "Đến câu hỏi của bạn"
+  },
+  "right_header": {
+    "vi_lang": "Tiếng Việt",
+    "en_lang": "Tiếng Anh",
+    "login": "Đăng nhập",
+    "signup": "Đăng kí",
+    "profile": "Thông tin",
+    "logout": "Đăng xuất"
+  },
+  "nav_bar": {
+    "nav_bar_link1": "Trang chủ",
+    "nav_bar_link2": "Trang người dùng",
+    "nav_bar_link3": "Trang quản trị"
+  },
+  "card_question": {
+    "card_title": "Bài",
+    "card_btn": "Làm ngay"
+  },
+  "detail_quiz_container": {
+    "question_header": "Bài",
+    "btn_prev": "Câu trước",
+    "btn_next": "Câu sau",
+    "btn_finish": "Nộp bài",
+    "backup_text": "Không có ảnh",
+    "question_title": "Câu",
+    "quiz_result_header": "Kết quả",
+    "quiz_result_question": "Tổng số câu hỏi",
+    "quiz_result_answer": "Số câu trả lời đúng",
+    "quiz_show_btn": "Xem đáp án",
+    "quiz_close_btn": "Đóng"
+  },
+  "nav_breadcrumb": {
+    "breadcrumb_home": "Trang chủ",
+    "breadcrumb_user": "Trang người dùng",
+    "breadcrumb_quiz": "Làm bài tập"
+  },
+  "admin": {
+    "dashboard_section": "Bảng điều khiển",
+    "manage_user_section": "Quản lí người dùng",
+    "manage_quiz_form_section": "Quản lí bài thi",
+    "manage_quiz_section": "Quản lí câu hỏi",
+    "help_link": "Cần giúp đỡ"
+  },
+  "dashboard_container": {
+    "dashboard_heading": "Bảng thống kê",
+    "dashboard_total_user": "Lượng người dùng",
+    "dashboard_total_quiz": "Lượng bài thi",
+    "dashboard_total_question": "Lượng câu hỏi",
+    "dashboard_total_answer": "Lượt trả lời"
+  },
+  "manage_user_container": {
+    "m_heading": "Quản lí người dùng",
+    "m_btn_add": "Thêm mới người dùng",
+    "table_id": "MÃ",
+    "table_username": "TÊN ĐĂNG NHẬP",
+    "table_email": "EMAIL",
+    "table_role": "VAI TRÒ",
+    "table_action": "THAO TÁC",
+    "table_btn_view": "Xem",
+    "table_btn_update": "Sửa",
+    "table_btn_delete": "Xóa",
+    "table_not_found": "Không có dữ liệu"
+  }
+}
